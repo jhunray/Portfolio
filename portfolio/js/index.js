@@ -91,7 +91,7 @@ function ChangePage(page) {
           
         I built this with PHP, JavaScript, HTML, and CSS, featuring dynamic animations, a glitch effect, particle effects, <br> 
         and a custom cursor for a personalized touch. </p>`
-        linkElement.href = "https://github.com/qw87rt?tab=repositories";
+        linkElement.href = "https://github.com/jhunray/Portfolio/tree/main/portfolio/img/webdes/Web%20Design";
     }
     else if(currentpage == 1){
         image.attr("src", "./portfolio/img/leavemgmt.png");
@@ -101,7 +101,7 @@ function ChangePage(page) {
         The system includes a mobile app, desktop app, a REST API, and a database. I utilized React Native with Expo for <br>
         the mobile app, VB.NET for the desktop app, Express.js for the REST API, and MySQL for the database. It is hosted <br>
         on Hostinger.</p>`;
-        linkElement.href = "https://github.com/qw87rt?tab=repositories";
+        linkElement.href = "https://github.com/jhunray/Portfolio/tree/main/portfolio/img/webdes/Leave%20Management%20System";
         console.log("updated image to : " + currentpage);
     }
     else if(currentpage == 2){

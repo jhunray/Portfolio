@@ -7,7 +7,7 @@
 This is the source code for my professional portfolio website hosted on [GitHub Pages](https://pages.github.com/). The website showcases my skills, projects, and provides a way for visitors to contact me.
 
 ## Live website
-You can see the live website in action at [Joelmatic.com](https://Joelmatic.com/). <br>
+You can see the live website in action at [JhunRay.com](https://jhunray.github.io/Portfolio/index.html). <br>
 
 
 ## 📕 Languages Used

@@ -91,7 +91,7 @@ function ChangePage(page) {
           
         I built this with PHP, JavaScript, HTML, and CSS, featuring dynamic animations, a glitch effect, particle effects, <br> 
         and a custom cursor for a personalized touch. </p>`
-        linkElement.href = "https://github.com/qw87rt/PHP--2023_WebDesignContest";
+        linkElement.href = "https://github.com/qw87rt?tab=repositories";
     }
     else if(currentpage == 1){
         image.attr("src", "./portfolio/img/leavemgmt.png");

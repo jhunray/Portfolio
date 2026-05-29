@@ -1,446 +1,453 @@
-<!doctype html>
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pixelify+Sans">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mali">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap">
-
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet"/>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <link rel="icon" href="./portfolio/img/profile.jpg" type="image/png">
-
-    <link href="./portfolio/CSS/index.css" rel="stylesheet"/>
-    <script src="./portfolio/js/index.js"></script>
-    <script src="./portfolio/js/particles.js"></script>
-
-    <meta name="description" content="Explore Jhun Ray Omiping's portfolio - a testament to his journey as an aspiring software engineer. Dive into his projects, learn about his skills, and discover his passion for technology.">
-
-    <meta property="og:title" content="@JhunRay Omiping | Portfolio">
-    <meta property="og:site_name" content="Jhun Ray Omiping">
-    <meta property="og:description" content="Explore Jhun Ray Omiping's portfolio - a testament to his journey as an aspiring software engineer. Dive into his projects, learn about his skills, and discover his passion for technology.">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Jhun Ray Omiping | Compass Portfolio</title>
+    <meta name="description" content="Portfolio of Jhun Ray Omiping – software engineer, support analyst, creator of Leave Management System and Budget Tracker.">
     <meta property="og:image" content="https://raw.githubusercontent.com/jhunray/Portfolio/main/portfolio/img/thumbnail.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="og:type" content="profile">
-    <meta property="og:locale" content="en_PH">
-    <meta property="og:author" content="Jhun Ray Omiping">
-    <meta name="twitter:title" content="@JhunRay Omiping | Portfolio">
-    <meta name="twitter:description" content="Discover the work of Jhun Ray Omiping, an aspiring software engineer. Learn about his projects, skills, and passion for technology.">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/jhunray/Portfolio/main/portfolio/img/thumbnail.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: auto; }
+        body { font-family: 'Inter', sans-serif; background: #0a0c12; color: #eef5ff; overflow-x: hidden; }
 
-    <title>@JhunRayOmiping - Portfolio</title>
+        .gamification-panel {
+            position: fixed; bottom: 25px; right: 25px; z-index: 100;
+            background: rgba(10,15,25,0.85); backdrop-filter: blur(12px);
+            border-radius: 28px; padding: 10px 20px; display: flex; gap: 24px;
+            border: 1px solid #fe822e; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            font-weight: 600; pointer-events: auto; font-size: 1rem;
+        }
+        .score-box, .level-box { display: flex; align-items: center; gap: 8px; }
+        .score-box i, .level-box i { color: #fe822e; }
+        .score-value, .level-value { color: #fe822e; font-weight: 800; letter-spacing: 1px; }
+
+        #canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
+        .container { position: relative; z-index: 2; max-width: 1300px; margin: 0 auto; padding: 2rem; }
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 4rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); scroll-margin-top: 70px; }
+        .hero { justify-content: center; align-items: center; text-align: center; }
+        .glitch-text { font-size: 4rem; font-weight: 800; background: linear-gradient(135deg, #fff, #fe822e, #ffb366); background-clip: text; -webkit-background-clip: text; color: transparent; letter-spacing: -0.02em; }
+        .italic-quote { font-size: 1.4rem; font-style: italic; color: #ffd9a5; margin-top: 1rem; max-width: 700px; line-height: 1.4; }
+        
+        .button-group { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+        .btn { display: inline-block; padding: 10px 28px; background: rgba(254,130,46,0.15); border: 1px solid #fe822e; border-radius: 40px; font-weight: 600; color: #fe822e; transition: 0.3s; backdrop-filter: blur(4px); cursor: pointer; text-decoration: none; }
+        .btn:hover { background: #fe822e; color: #0a0c12; box-shadow: 0 0 15px #fe822e; transform: scale(1.02); }
+
+        .collectible { position: absolute; width: 22px; height: 22px; background: radial-gradient(circle, #ffdd88, #fe822e); border-radius: 50%; box-shadow: 0 0 15px orange; cursor: pointer; z-index: 15; transition: transform 0.2s; pointer-events: auto; }
+        .collectible:hover { transform: scale(1.3); }
+
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .project-card { background: rgba(20,28,40,0.65); backdrop-filter: blur(8px); border-radius: 28px; padding: 1.8rem; border: 1px solid rgba(254,130,46,0.25); transition: all 0.3s ease; cursor: pointer; }
+        .project-card:hover { transform: translateY(-8px); border-color: #fe822e; box-shadow: 0 20px 30px -12px rgba(254,130,46,0.3); }
+        .project-icon { font-size: 2.2rem; color: #fe822e; margin-bottom: 1rem; }
+        
+        .timeline-item { margin-bottom: 1.5rem; border-left: 2px solid #fe822e; padding-left: 1.5rem; }
+        .timeline-title { font-weight: 700; color: #fe822e; }
+        
+        .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        
+        .contact-links { display: flex; gap: 1.5rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
+        .contact-links a { color: #eef5ff; font-size: 1.8rem; transition: 0.2s; }
+        .contact-links a:hover { color: #fe822e; transform: translateY(-4px); }
+        
+        footer { text-align: center; padding: 2rem; opacity: 0.7; font-size: 0.85rem; }
+        @media (max-width: 700px) {
+            .glitch-text { font-size: 2.5rem; }
+            .italic-quote { font-size: 1.1rem; }
+            .gamification-panel { bottom: 15px; right: 15px; padding: 6px 14px; gap: 14px; }
+        }
+        .badge-orange { background: rgba(254,130,46,0.2); padding: 4px 12px; border-radius: 30px; font-size: 0.8rem; display: inline-block; margin-right: 8px; margin-bottom: 8px; }
+        
+        .nav-dots { position: fixed; left: 20px; top: 50%; transform: translateY(-50%); z-index: 200; display: flex; flex-direction: column; gap: 12px; }
+        .nav-dot { width: 10px; height: 10px; background: rgba(254,130,46,0.4); border-radius: 50%; transition: 0.2s; cursor: pointer; }
+        .nav-dot.active { background: #fe822e; transform: scale(1.3); }
+        @media (max-width: 700px) { .nav-dots { display: none; } }
+    </style>
+</head>
+<body>
+    <div class="nav-dots">
+        <div class="nav-dot" data-section="home"></div>
+        <div class="nav-dot" data-section="about"></div>
+        <div class="nav-dot" data-section="experience"></div>
+        <div class="nav-dot" data-section="projects"></div>
+        <div class="nav-dot" data-section="education"></div>
+        <div class="nav-dot" data-section="contact"></div>
+    </div>
+
+    <div id="canvas-container"></div>
+   <div id="gameHint" class="gamification-panel" style="bottom:75px; font-size:0.85rem; border-color:rgba(254,130,46,0.4); background:rgba(10,15,25,0.6); color:#ffb366; opacity:0; transition:opacity 0.5s ease;"><i class="fas fa-mouse-pointer" style="margin-right:5px;"></i> Tap the orange circles to gain score!</div>
+    <div class="gamification-panel">
+        <div class="score-box"><i class="fas fa-star"></i><span>SCORE</span><span id="scoreValue" class="score-value">0</span></div>
+        <div class="level-box"><i class="fas fa-chart-line"></i><span>LEVEL</span><span id="levelValue" class="level-value">1</span></div>
+    </div>
+    <div class="container">
+        <section class="hero" id="home">
+            <div class="fade-up">
+                <h1 class="glitch-text">JHUN RAY OMIPING</h1>
+                <div class="italic-quote">“A ship is safe in harbor, but that’s not what ships are for”</div>
+                <div class="button-group">
+                    <a href="#projects" class="btn"><i class="fas fa-code"></i> Projects</a>
+                    <a href="#experience" class="btn"><i class="fas fa-briefcase"></i> Experience</a>
+                    <a href="#contact" class="btn"><i class="fas fa-envelope"></i> Contact</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="fade-up">
+                <p style="max-width: 800px; line-height: 1.6; font-size: 1.1rem;">With 2 years of hands‑on experience, I'm still constantly learning — databases, networking, and technology in general. In a fast‑paced tech world, the ability to <strong style="color:#fe822e;">learn and unlearn</strong> is everything. I'm looking for a role where I can deepen my understanding of the things I'm fascinated about and apply them to solve real, day‑to‑day problems.</p>
+                <div style="margin-top: 1.5rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                    <span class="badge-orange"><i class="fas fa-map-marker-alt"></i> Taguig, National Capital Region, Philippines</span>
+                   <!-- <span class="badge-orange"><i class="fas fa-calendar-alt"></i> 2+ years experience</span>
+                    <span class="badge-orange"><i class="fas fa-laptop-code"></i> Support Analyst at POS</span>-->
+                </div>
+            </div>
+        </section>
+
+
+        <section id="experience">
+            <div class="fade-up">
+                <div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">POS Support Analyst I | 01/2025 – present</div>
+                        <p>Provided remote IT support to end users using Bomgar/BeyondTrust for computer system issues, including software/hardware, POS/back-office systems, payment terminals, and forecourt site controllers. </p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-title">Chat Support) | 07/2024 – 01/2025</div>
+                        <p>Assisted customers in resolving issues on their iOS devices through chat.</p>
+                    </div>
+                  <!--  <div class="timeline-item">
+                        <div class="timeline-title">Internship (Maasin LGU) | 02/2024 – 05/2024</div>
+                        <p>Continued development of the : bug fixing, testing, etc.</p>
+                    </div>-->
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="fade-up">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <h3>Leave Management System (Capstone Project)</h3>
+                        <p>Streamlines leave request processing and leave balance monitoring. The system includes a mobile app, desktop app, a REST API, and a database. I utilized React Native with Expo for the mobile app, VB.NET for the desktop app, Express.js for the REST API, and MySQL for the database. It is hosted on a VPS using Hostinger.</p>
+                        <br><br>
+                        <a href="https://github.com/qw87rt/ReactNative--LeaveManagement" class="btn" target="_blank" rel="noopener noreferrer">GitHub Repo →</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Tipidify - Budget Tracker</h3>
+                        <p>A simple app that helps you track where your money goes. I originally built it for myself as I was getting annoyed at how much time I wasted manually calculating things with a regular calculator. I tried other income and expense trackers, but most felt too complex for a simple task or didn’t fit what I actually needed. I’m sharing it with others who want the same thing: a light, easy way to see where your money goes, and make better choices.. one peso at a time.</p> <br>
+                        <a href="https://play.google.com/store/apps/details?id=com.jhunray.tipidify" class="btn" target="_blank" rel="noopener noreferrer">Play Store →</a>
+                    </div>
+                    <!--<div class="project-card">
+                        <div class="project-icon"><i class="fas fa-compass"></i></div>
+                        <h3>This 3D Portfolio</h3>
+                        <p>Gamified experience with a Three.js compass, collectible stars, scroll-based animations — symbolizing direction, purpose, and navigating complex systems.</p>
+                        <span class="btn" style="margin-top:1rem;display:inline-block;">GitHub Repo →</span>
+                    </div>-->
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <div class="fade-up">
+                <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+                    <div style="flex:1; min-width: 200px;">
+                        <h3 style="color:#fe822e;"><i class="fas fa-university"></i> Bachelor's Degree in Information Technology</h3>
+                        <p>2022 – 2024 • Dean's Lister</p>
+                        <h3 style="color:#fe822e; margin-top:1rem;"><i class="fas fa-school"></i> Associate in Computer Technology</h3>
+                        <p>2020 – 2022 • Dean's Lister</p>
+                    </div>
+                    <div style="flex:1">
+                        <h3 style="color:#fe822e;"><i class="fas fa-certificate"></i> Certifications</h3>
+                        <p>✔ Philippine National IT Standards Certified (11/2023)</p>
+                        <p>✔ Civil Service Eligible – Professional (05/2024)</p>
+                        <p>✔ Civil Service Eligible – Subprofessional (11/2023)</p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="fade-up" style="text-align: center;">
+                <p style="margin: 0 0 1rem 0;">Open for collaborations, code reviews, or just a chat about infinite loops and tech.</p>
+                <div class="contact-links">
+                    <a href="https://github.com/qw87rt" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/jhun-ray-omiping-75992224b" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://discord.com/users/7hunray" target="_blank"><i class="fab fa-discord"></i></a>
+                    <a href="mailto:jhunrayomiping@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+               <!-- <p style="margin-top: 2rem; font-size: 0.9rem;">Reach out to me by sending an email to 📧 jhunrayomiping@gmail.com</p>-->
+            </div>
+        </section>
+        <footer>
+            <p>© 2025 Jhun Ray Omiping • Reach out to me by sending an email to 📧 jhunrayomiping@gmail.com</p>
+        </footer>
+    </div>
+
     <script>
-        function checkScreenWidth() {
-            if (window.innerWidth <= 768) {
-                window.location.href = "mobile.html";
+        // Gamification logic
+        // Toggle hint visibility loop (5s visible, 5s hidden)
+            const hintEl = document.getElementById('gameHint');
+            setInterval(() => {
+                // If it's hidden (opacity 0), show it. If it's showing, hide it.
+                hintEl.style.opacity = hintEl.style.opacity === '1' ? '0' : '1';
+            }, 5000);
+        let totalScore = 0, currentLevel = 1;
+        const scoreSpan = document.getElementById('scoreValue'), levelSpan = document.getElementById('levelValue');
+        function addScore(points) {
+            totalScore += points;
+            scoreSpan.innerText = totalScore;
+            let newLevel = 1 + Math.floor(totalScore / 100);
+            if (newLevel !== currentLevel) {
+                currentLevel = newLevel;
+                levelSpan.innerText = currentLevel;
+                gsap.to('.gamification-panel', { scale:1.2, duration:0.2, yoyo:true, repeat:1, ease:"power1" });
+                const levelUpMsg = document.createElement('div');
+                levelUpMsg.innerText = `⚡ LEVEL ${currentLevel} UNLOCKED! ⚡`;
+                levelUpMsg.style.position = 'fixed'; levelUpMsg.style.bottom = '80px'; levelUpMsg.style.right = '30px';
+                levelUpMsg.style.background = '#fe822e'; levelUpMsg.style.color = '#0a0c12';
+                levelUpMsg.style.padding = '8px 20px'; levelUpMsg.style.borderRadius = '40px'; levelUpMsg.style.fontWeight = 'bold';
+                levelUpMsg.style.zIndex = '2000'; levelUpMsg.style.boxShadow = '0 0 15px orange';
+                document.body.appendChild(levelUpMsg);
+                gsap.to(levelUpMsg, { opacity: 0, y: -40, duration: 1.5, delay: 1, onComplete: () => levelUpMsg.remove() });
             }
         }
 
-        // Call the function immediately to handle initial load
-        checkScreenWidth();
+        // Floating collectibles
+        function spawnCollectible() {
+            let star = document.createElement('div');
+            star.className = 'collectible';
+            star.style.left = Math.random() * (window.innerWidth - 100) + 50 + 'px';
+            star.style.top = Math.random() * (window.innerHeight - 150) + 70 + 'px';
+            document.body.appendChild(star);
+            star.addEventListener('click', (e) => {
+                e.stopPropagation();
+                addScore(10);
+                gsap.to(star, { scale: 0, duration: 0.2, onComplete: () => star.remove() });
+                setTimeout(spawnCollectible, 600);
+            });
+            setTimeout(() => { if(star.parentNode) star.remove(); spawnCollectible(); }, 10000);
+        }
+        for(let i=0;i<3;i++) setTimeout(spawnCollectible, i*500);
+        setInterval(() => { if(document.querySelectorAll('.collectible').length < 4) spawnCollectible(); }, 7000);
 
-        // Also call it whenever the window is resized
-        window.addEventListener('resize', checkScreenWidth);
-    </script>
-  </head>
-  <body id="home2">
-    <div id="particles-js"></div>
-    <div id="load" class="center">
-        <div role="status" style="transform: scale(3);">
-            <svg aria-hidden="true" class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/><path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/></svg>
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    <div id="moblie" class="center mobile-inv">
-      <h1 class="Title" id="home"> 
-        We recomend using <br> <span style="color: rgb(254, 130, 46);">The Moblie Site </span> 
-      </h1>
-      <div style="margin: 0 auto; text-align: center; margin-top: 50px;">
-        <a href="./mobile.html" style="transform: scale(2);" id="project-button" class="ebutton inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-orange-600 dark:hover:bg-orange-500 dark:focus:ring-orange-600">
-          Redirecting, please wait...
-          <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-          </svg>
-        </a>
-      </div>
-  </div>
-    
-<div id="main" class="inv main-inv">
+        // ========== THREE.JS: COMPASS ROSE ==========
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.background = null;
+        scene.fog = new THREE.FogExp2(0x0a0c12, 0.008);
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 1.2, 11);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
 
-  <!-- Nav Bar-->
-  <nav class="bg-white dark:bg-blue-500 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-blue-300 nav-b">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <div class="w-full flex justify-start">
-            <a href="https://github.com/qw87rt" class="flex items-start w-full">
-              <img src="./portfolio/img/profile.jpg" class="h-8 w-8 rounded-full mr-3" alt="jhunray omiping">
-              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white underLineEffect" style="transform: translateY(-3px);" >7hunRay</span></a>
-          </div>
-  
-          <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky" style="padding-top: 10px; padding-left: 10px;">
-            <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-blue-500 md:dark:bg-blue-500 dark:border-gray-700">
-              <li><a onclick="smoothScrollToElement(document.getElementById(`home2`))"; class="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-white md:p-0 md:dark:hover:text-blue-300 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ebutton">🏠 Home</a></li>
-              <li><a onclick="smoothScrollToElement(document.getElementById(`mywork`))"; class="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-white md:p-0 md:dark:hover:text-blue-300 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ebutton">⚒ Projects</a></li>
-              <li><a onclick="smoothScrollToElement(document.getElementById(`contact`))"; class="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-white md:p-0 md:dark:hover:text-blue-300 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ebutton">📖 Contact</a></li>
-                 <li>
-                        <a href="./tools/list.html" class="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-white md:p-0 md:dark:hover:text-blue-300 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ebutton">
-                            🛠️ Forbidden Tools
-                        </a>
-                  </li>
-            </ul>
-          </div>
-        </div>
-  </nav>
-  
-  <!-- Title -->
-  <div>
-    <h1 class="Title" id="home1" style="font-style: italic;"> 
-      "Beyond Code, <span style="color: rgb(254, 130, 46);">Beyond Limits!"</span> 
-    </h1>
-  </div>
-  <br>
-  <div style="width: 1200px;" class="bg-white card bg-opacity-50 border border-gray-200 rounded-lg shadow dark:bg-blue-600 dark:border-blue-200 mx-auto">
-      <!-- Breadcrumb -->
-      <nav class="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-blue-600 dark:border-blue-700 " aria-label="Breadcrumb">
-        <ol class="inline-flex items-center space-x-1 md:space-x-3">
-          <li class="inline-flex items-center">
-            <a class="inline-flex items-center text-sm font-medium text-white-700 hover:text-red-600 dark:text-red-400 dark:hover:text-white" style=" font-family: 'Pixelify Sans', sans-serif; cursor: default;">
-              <svg class="w-3 h-3 mr-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
-              </svg>
-              Home
-            </a>
-          </li>
-          <li>
-            <div class="flex items-center mx-auto">
-              <svg class="w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10" >
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-              </svg>
-              <a class="ml-1 text-sm font-medium text-red-700 hover:text-red-600 md:ml-2 dark:text-red-400 dark:hover:text-white" style=" font-family: 'Pixelify Sans', sans-serif; cursor: default;">JhunRayOmiping</a>
-            </div>
-          </li>
-          <li>
-            <div class="flex items-center">
-              <svg class="w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-              </svg>
-              <a class="ml-1 text-sm font-medium text-red-700 hover:text-red-600 md:ml-2 dark:text-red-400 dark:hover:text-white" style=" font-family: 'Pixelify Sans', sans-serif; cursor: default;">AboutMe</a>
-            </div>
-          </li>
-          <li>
-            <div class="flex items-center">
-              <svg class="w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-              </svg>
-              <a class="ml-1 text-sm font-medium text-red-700 hover:text-red-600 md:ml-2 dark:text-red-400 dark:hover:text-white" style=" font-family: 'Pixelify Sans', sans-serif; cursor: default;">Intro.md</a>
-            </div>
-          </li>
-        </ol>
-      </nav>
-    
-      <!-- Image -->
-      <div class="mt-3 flex items-center justify-start" style="margin-left: 30px;">
-        <div class="flex items-center"> <!-- Create a container for the image and text -->
-          <img src="./portfolio/img/rpr2.gif" class="rounded-full mt-0 self-start pfp" style="width: 300px; height: 300px;" alt="Jhun Ray Omiping">
-          <div class="text-center ml-4">
-            <div class="flex space-x-4 mx-auto container" style="align-self: flex-start;"> <!-- Create a flex container with horizontal spacing -->
-              <div class="blocky-card block max-w-sm card p-6 bg-white border border-blue-200 rounded-lg shadow hover:bg-blue-100 dark:bg-blue-600 dark:border-blue-700 dark:hover:bg-blue-700">
-                <a class="About-title CardFont" style="margin-top: -240px;"><span id="wave">👋</span> About Me<br></a>
-                <a class="SmallerName"> 
-                  Hi, I'm Jhun Ray Omiping. I'm fascinated by a wide array of subjects, including technology, science, history, art, and literature. My passion lies in continuously learning and exploring different viewpoints about the world. At the moment, I'm diving deep into <span style=" color: rgb(254, 130, 46);font-weight: bold;">software development, statistics, and analytics</span>, intrigued by the immense potential technology holds for creating positive impacts globally.<br>
-                </a>
-              </div>
-              <div class="blocky-card block max-w-sm card p-6 bg-white border border-blue-200 rounded-lg shadow hover:bg-blue-100 dark:bg-blue-600 dark:border-blue-700 dark:hover:bg-blue-700">
-                <a class="About-title CardFont" style="margin-top: -240px;">💻 Skills<br></a>
-                <a class="SmallerName">
-                  I have honed my skills in various programming languages such as <span style=" color: rgb(254, 130, 46);font-weight: bold;">JavaScript, JAVA, C </span>, and I am constantly seeking to stay updated with the latest trends and tools in the ever-evolving software landscape.
-                </a>
-              </div>
-            </div>
-            <div class="flex space-x-4 " style="margin-top: 30px;" > <!-- Create a flex container with horizontal spacing -->
-              <div class="blocky-card block max-w-sm card p-6 bg-white border border-blue-200 rounded-lg shadow hover:bg-blue-100 dark:bg-blue-600 dark:border-blue-700 dark:hover:bg-blue-700">
-                <a class="About-title CardFont" style="margin-top: -240px;">📜 Creativity<br></a>
-                <a class="SmallerName"> 
-                  As a Software Engineering enthusiast, I view <span style=" color: rgb(254, 130, 46);font-weight: bold;">programming as a creative art form</span>, enabling me to solve real-world problems and enhance user experiences through innovative software design and development. <br>
-                </a>
-              </div>
-              <div class="blocky-card block max-w-sm card p-6 bg-white border border-blue-200 rounded-lg shadow hover:bg-blue-100 dark:bg-blue-600 dark:border-blue-700 dark:hover:bg-blue-700">
-                <a class="About-title CardFont" style="margin-top: -240px; ">🔨 Technology <br></a>
-                <a class="SmallerName">
-                  </span> My passion for <span style=" color: rgb(254, 130, 46);font-weight: bold;">programming</span> is driven by a desire to understand the interconnectedness of all disciplines and their potential to create positive change. I believe that by bridging gaps between these fields, we can innovate and solve complex problems, leading to a more harmonious and enlightened society.
-                </a>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-      <div style="transform: translateY(-460px);">
-        <a class="UserName mt-0 self-start">Jhun Ray Omiping <br></a>
-        <a class="SmallerName mt-0 self-start">7hunray</a>
-      </div>
-  </div>
-  <br>
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x333344);
+        scene.add(ambientLight);
+        const mainLight = new THREE.DirectionalLight(0xffeedd, 1.2);
+        mainLight.position.set(3, 5, 2);
+        scene.add(mainLight);
+        const fillLight = new THREE.PointLight(0xfe822e, 0.6);
+        fillLight.position.set(1, 2, 2);
+        scene.add(fillLight);
+        const backLight = new THREE.PointLight(0x88aaff, 0.4);
+        backLight.position.set(-1, 1.5, -4);
+        scene.add(backLight);
 
-  <!-- my wi=ork title-->
-  <div class="space-x-4 p-4 justify-center rounded-lg" id="mywork">
-    <h1 class="Title size-mb" style="font-size: 70px; ">
-      👷‍♂️ Previous Projects 👷‍♂️
-    </h1>
-    <div class="porject-mb">
-    <div class="flex justify-center porject-mb-tabs">
-      <div class="inline-flex rounded-md shadow-sm" role="group">
-        <button type="button" class="tabs_button px-4 py-2 text-sm font-medium text-black bg-white border border-blue-200 rounded hover:bg-blue-100 hover:text-white-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-white-700 dark:bg-blue-700 dark:border-blue-600 dark:text-black dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-500 dark:focus:text-white" onclick="ChangePage(0)">
-          1
-        </button>
-        <button type="button" class="tabs_button px-4 py-2 text-sm font-medium text-black bg-white border border-blue-200 rounded hover:bg-blue-100 hover:text-white-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-white-700 dark:bg-blue-700 dark:border-blue-600 dark:text-black dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-500 dark:focus:text-white" onclick="ChangePage(1)">
-          2
-        </button>
-        <button type="button" class="tabs_button px-4 py-2 text-sm font-medium text-black bg-white border border-blue-200 rounded hover:bg-blue-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-blue-700 dark:border-blue-600 dark:text-black dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-500 dark:focus:text-white" onclick="ChangePage(2)">
-          3
-        </button>
-        <a style="padding-left: 10px;"></a>
-      <!--  <button type="button" class="tabs_button px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white" onclick="ChangePage(3)">
-          4
-        </button>
-        <button type="button" class="tabs_button px-4 py-2 text-sm font-medium text-white-900 bg-white border border-blue-200 rounded-l-lg hover:bg-blue-100 hover:text-white-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-white-700 dark:bg-blue-700 dark:border-blue-600 dark:text-white dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-500 dark:focus:text-white" onclick="ChangePage(4)">
-          5
-        </button>
-        <button type="button" class="tabs_button px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white" onclick="ChangePage(5)">
-          6
-        </button> -->
-      </div>
-  </div>
-  
-  <!-- WORK -->
-  <div class="flex justify-center p-4 porject-m">
-    <div class="arrow">
-      <svg class="w-40 h-40 text-blue-800 text-opacity-50 hover:text-vlue-700 cursor-pointer arrowing" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" onclick="backPage()">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-    </div>
-    <!-- card 1 -->
-    <div class="min-w-0 card min-h-[content] bg-white border border-gray-200 rounded-lg shadow dark:bg-blue-600 dark:border-blue-400 overflow-hidden">
-      <a>
-        <img class="rounded-t-lg" id="project-image" src="./portfolio/img/ccsWebdes.png" width="900" height="400" alt="jhunray omiping | project" />
-      </a>
-      <div class="p-5 image-container">
-        <a>
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white" id="project-Title"><!--<span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Most Popular</span>-->Web Design Contest</h5>
-        </a>
-        <p class="mb-3 font-normal text-white" id="project-contect"><span style="color: white; font-size: 20px;"><br> Overview: </span><br>
-          
-           I built this with PHP, JavaScript, HTML, and CSS, featuring dynamic animations, a glitch effect, particle effects, <br> 
-        and a custom cursor for a personalized touch. </p>`
+        // Group for the entire compass
+        const compassGroup = new THREE.Group();
+        scene.add(compassGroup);
+
+        // --- Outer Ring (Torus) ---
+        const ringGeo = new THREE.TorusGeometry(1.1, 0.08, 64, 200);
+        const ringMat = new THREE.MeshStandardMaterial({ color: 0xfe822e, metalness: 0.8, roughness: 0.3 });
+        const outerRing = new THREE.Mesh(ringGeo, ringMat);
+        compassGroup.add(outerRing);
+
+        // Inner ring (thin)
+        const innerRingGeo = new THREE.TorusGeometry(0.92, 0.05, 64, 200);
+        const innerRingMat = new THREE.MeshStandardMaterial({ color: 0xffaa66, metalness: 0.6 });
+        const innerRing = new THREE.Mesh(innerRingGeo, innerRingMat);
+        compassGroup.add(innerRing);
+
+        // --- Directional Markers (N, S, E, W using thin boxes) ---
+        const markerMat = new THREE.MeshStandardMaterial({ color: 0xffcc88, metalness: 0.5 });
+        // North (red tip)
+        const northMarker = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.12, 0.4, 6), new THREE.MeshStandardMaterial({ color: 0xff6666, metalness: 0.3 }));
+        northMarker.position.set(0, 0.22, 1.08);
+        compassGroup.add(northMarker);
+        // South
+        const southMarker = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.1, 0.35, 6), markerMat);
+        southMarker.position.set(0, -0.22, -1.08);
+        compassGroup.add(southMarker);
+        // East
+        const eastMarker = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, 0.35), markerMat);
+        eastMarker.position.set(1.08, 0, 0);
+        eastMarker.rotation.z = Math.PI / 2;
+        compassGroup.add(eastMarker);
+        // West
+        const westMarker = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, 0.35), markerMat);
+        westMarker.position.set(-1.08, 0, 0);
+        westMarker.rotation.z = Math.PI / 2;
+        compassGroup.add(westMarker);
+
+        // Add small decorative spheres at 45° angles
+        const gemMat = new THREE.MeshStandardMaterial({ color: 0xffaa66, emissive: 0x442200 });
+        for (let i = 0; i < 8; i++) {
+            const angle = (i / 8) * Math.PI * 2;
+            const rad = 1.02;
+            const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.07, 16, 16), gemMat);
+            sphere.position.set(Math.cos(angle) * rad, Math.sin(angle) * rad, 0);
+            compassGroup.add(sphere);
+        }
+
+        // --- Central Glowing Sphere ---
+        const centerGlow = new THREE.Mesh(new THREE.SphereGeometry(0.28, 32, 32), new THREE.MeshStandardMaterial({ color: 0xffaa66, emissive: 0xfe822e, emissiveIntensity: 0.5, metalness: 0.2 }));
+        compassGroup.add(centerGlow);
+
+        // --- Needle (rotating) ---
+        const needleGroup = new THREE.Group();
+        compassGroup.add(needleGroup);
+        // Needle body (long triangle using cone + cylinder)
+        const needleTip = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.7, 8), new THREE.MeshStandardMaterial({ color: 0xffcc88, metalness: 0.7 }));
+        needleTip.position.y = 0.35;
+        needleGroup.add(needleTip);
+        const needleBase = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.4, 8), new THREE.MeshStandardMaterial({ color: 0xddaa77 }));
+        needleBase.position.y = 0;
+        needleGroup.add(needleBase);
+        const needleTail = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.45, 8), new THREE.MeshStandardMaterial({ color: 0xaa8866 }));
+        needleTail.position.y = -0.3;
+        needleGroup.add(needleTail);
+        // Center pin on needle
+        const pin = new THREE.Mesh(new THREE.SphereGeometry(0.09, 16, 16), new THREE.MeshStandardMaterial({ color: 0xffdd99, emissive: 0x442200 }));
+        pin.position.y = 0;
+        needleGroup.add(pin);
+
+        // --- Floating Particles (stars around compass) ---
+        const particleCount = 600;
+        const particleGeo = new THREE.BufferGeometry();
+        const particlePositions = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            const radius = 1.6 + Math.random() * 0.8;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(2 * Math.random() - 1);
+            particlePositions[i*3] = Math.sin(phi) * Math.cos(theta) * radius;
+            particlePositions[i*3+1] = Math.sin(phi) * Math.sin(theta) * radius * 0.8;
+            particlePositions[i*3+2] = Math.cos(phi) * radius;
+        }
+        particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+        const particleMat = new THREE.PointsMaterial({ color: 0xffaa66, size: 0.035, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending });
+        const particles = new THREE.Points(particleGeo, particleMat);
+        compassGroup.add(particles);
+
+        // --- Tiny orbiting orbs (like compass gems) ---
+        const orbCount = 12;
+        const orbs = [];
+        for (let i = 0; i < orbCount; i++) {
+            const orb = new THREE.Mesh(new THREE.SphereGeometry(0.055, 12, 12), new THREE.MeshStandardMaterial({ color: 0xffaa66, emissive: 0x552200 }));
+            compassGroup.add(orb);
+            orbs.push(orb);
+        }
+
+        // Animation variables
+        let time = 0, scrollProgress = 0;
+        ScrollTrigger.create({ onUpdate: (self) => { scrollProgress = self.progress; } });
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.012;
             
-        <a href="https://github.com/qw87rt?tab=repositories" id="project-button-2" class="ebutton inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-orange-600 rounded-lg hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-orange-600 dark:hover:bg-orange-500 dark:focus:ring-orange-600">
-          More
-          <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-          </svg>
-        </a>
-      </div>
-    </div>
-    <div class="arrow">
-      <svg class="w-40 h-40 text-blue-800  text-opacity-50 hover:text-vlue-700 cursor-pointer arrowing" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" onclick="nextPage()">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </div>
-    <br>
-    <br>
-    <br>
-  </div>
-</div>
-</div>
+            // Compass rotation influenced by scroll
+            const rotY = 0.3 + scrollProgress * 0.7;
+            compassGroup.rotation.y = time * rotY;
+            compassGroup.rotation.x = Math.sin(time * 0.3) * 0.1;
+            compassGroup.rotation.z = Math.cos(time * 0.2) * 0.05;
+            
+            // Needle rotates independently (points roughly north, but animated)
+            needleGroup.rotation.z = Math.sin(time * 0.5) * 0.4;
+            needleGroup.rotation.x = Math.sin(time * 0.7) * 0.1;
+            
+            // Pulse central glow
+            const intensity = 0.5 + Math.sin(time * 3) * 0.2;
+            centerGlow.material.emissiveIntensity = intensity;
+            
+            // Animate orbiting orbs
+            orbs.forEach((orb, idx) => {
+                const t = time * 0.8 + idx;
+                const rad = 1.35;
+                const x = Math.cos(t) * rad;
+                const z = Math.sin(t * 1.2) * rad;
+                const y = Math.sin(t * 1.5) * 0.5;
+                orb.position.set(x, y, z);
+                orb.material.emissiveIntensity = 0.3 + Math.sin(time * 3 + idx) * 0.2;
+            });
+            
+            // Rotate particle cloud
+            particles.rotation.y = time * 0.08;
+            particles.rotation.x = Math.sin(time * 0.15) * 0.1;
+            
+            // Camera movement with mouse
+            camera.position.x += (mouseX * 0.3 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 0.2 + 1.2 - camera.position.y) * 0.05;
+            camera.lookAt(0, 0.1, 0);
+            
+            renderer.render(scene, camera);
+        }
+        animate();
+        
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
 
-  <!-- Contact -->
-  <div class="space-x-4 p-4 justify-center" id="mywork">
-    <h1 class="Title size-mb"  id="contact" style="font-size: 70px;">
-      💭 Contact 💭
-    </h1>
+        // Scroll reveal and nav dot active
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.2 });
+        fadeElements.forEach(el => observer.observe(el));
 
-    <div>
-      
-<section class="">
-  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16">
-      <div class="bg-blue-50 card dark:bg-blue-600 border border-blue-200 dark:border-blue-700 rounded-lg p-8 md:p-12 mb-8">
-          <a href="#" class="bg-blue-100 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md dark:bg-orange-500 dark:text-white mb-2">
-              <svg class="w-2.5 h-2.5 mr-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
-                  <path d="M11 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm8.585 1.189a.994.994 0 0 0-.9-.138l-2.965.983a1 1 0 0 0-.685.949v8a1 1 0 0 0 .675.946l2.965 1.02a1.013 1.013 0 0 0 1.032-.242A1 1 0 0 0 20 12V2a1 1 0 0 0-.415-.811Z"/>
-              </svg>
-              Formal
-          </a>
-          <h1 class="text-white dark:text-white text-3xl md:text-5xl font-extrabold mb-2">✉ Email</h1>
-          <p class="text-lg font-normal text-white dark:text-white mb-6">Feel free to get in touch with me via email below. Whether you have a <span style=" color: rgb(254, 130, 46);font-weight: bold;">project idea, collaboration proposal</span>, or just want to say hello, I'd love to hear from you! Looking forward to connecting and exploring exciting opportunities together.</p>
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=jhunrayomiping@gmail.com" target="_blank" class="ebutton inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-orange-600 hover:bg-orange-500 focus:ring-4 focus:ring-orange-300 dark:focus:ring-orange-500">
-          Send an email
-          <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-          </svg>
-      </a>
+        let seenSections = new Set();
+        const sections = document.querySelectorAll('section');
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting && !seenSections.has(entry.target.id)) {
+                    seenSections.add(entry.target.id);
+                    addScore(25);
+                }
+                document.querySelectorAll('.nav-dot').forEach(dot => {
+                    if(dot.dataset.section === entry.target.id && entry.isIntersecting) dot.classList.add('active');
+                    else if(dot.dataset.section === entry.target.id) dot.classList.remove('active');
+                });
+            });
+        }, { threshold: 0.4 });
+        sections.forEach(s => sectionObserver.observe(s));
 
+        document.querySelectorAll('.nav-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const targetId = dot.dataset.section;
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
 
-          <a onclick="copyToClipboard('jhunrayomiping@gmail.com'); changeTextOnClick(this, 'Copied !', 1000);"  style="margin-left: 10px;" class="cursor-pointer ebutton inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-orange-600 hover:bg-orange-500 focus:ring-4 focus:ring-orange-300 dark:focus:ring-orange-500">
-            Copy email 🧷
-        </a>
-      </div>
-      <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-gray-50 card dark:bg-blue-600 border border-blue-200 dark:border-blue-700 rounded-lg p-8 md:p-12">
-              <a href="#" class="bg-green-100 text-green-400 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md dark:bg-orange-600 dark:text-green-300 mb-2">
-                  <svg class="w-2.5 h-2.5 mr-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
-                      <path d="M17 11h-2.722L8 17.278a5.512 5.512 0 0 1-.9.722H17a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1ZM6 0H1a1 1 0 0 0-1 1v13.5a3.5 3.5 0 1 0 7 0V1a1 1 0 0 0-1-1ZM3.5 15.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM16.132 4.9 12.6 1.368a1 1 0 0 0-1.414 0L9 3.55v9.9l7.132-7.132a1 1 0 0 0 0-1.418Z"/>
-                  </svg>
-                  Informal
-              </a>
-              <h2 class="text-white dark:text-white text-3xl font-extrabold mb-2">🕹 Discord</h2>
-              <p class="text-lg font-normal text-white dark:text-white mb-4">Connect with me on Discord: @7hunray. Whether it's discussing <span style=" color: rgb(254, 130, 46);font-weight: bold;">tech, gaming, bugs</span>, or just having a friendly chat, I'm always open to meeting new people and joining exciting communities. Feel free to send me a friend request or message, and let's share our passions and ideas together. Looking forward to chatting with you!</p>
-              <a>
-              <div onclick="copyToClipboard('7hunray'); changeTextOnClick(this, 'Copied !', 1000);"  class="cursor-pointer ebutton inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-orange-600 hover:bg-orange-500 focus:ring-4 focus:ring-orange-300 dark:focus:ring-orange-500">Copy username 🧷
-              </a>
-            </div>
-          </div>
-          <div class="bg-gray-50 card dark:bg-blue-600 border border-blue-200 dark:border-blue-700 rounded-lg p-8 md:p-12">
-              <a href="#" class="bg-purple-100 text-purple-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md dark:bg-orange-600 dark:text-purple-400 mb-2">
-                  <svg class="w-2.5 h-2.5 mr-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4 1 8l4 4m10-8 4 4-4 4M11 1 9 15"/>
-                  </svg>
-                  Code
-              </a>
-              <h2 class="text-white dark:text-white text-3xl font-extrabold mb-2">💻 Github</h2>
-              <p class="text-lg font-normal text-white dark:text-white mb-4"><span style=" color: rgb(254, 130, 46);font-weight: bold;">For code contributions, bug reports, or any collaboration on projects</span>, you can reach me via GitHub. Don't hesitate to open issues, submit pull requests, or simply drop a message on any repository. Let's work together to build innovative solutions and make the coding world a better place! Looking forward to connecting with fellow developers and enthusiasts.</p>
-              <a href="https://github.com/qw87rt" class="cursor-pointer ebutton inline-flex justify-center items-center py-2.5 px-5 text-base font-medium text-center text-white rounded-lg bg-orange-600 hover:bg-orange-500 focus:ring-4 focus:ring-orange-300 dark:focus:ring-orange-500">Github
-                  <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                  </svg>
-              </a>
-          </div>
-  </div>
-</div>
-</section>
-
-    </div>
-  </div>
-
-  
-   <!-- Card at the bottem right -->
-  <div class="fixed bottom-2 card right-0 max-w-sm p-6 dark:bg-blue-600 border border-blue-200 rounded-lg shadow dark:bg-blue-600 noti hidden" style="border: 2px solid rgb(30, 129, 176); margin-right: 20px; margin-bottom: 20px;">
-    <svg class="w-7 h-7 text-white dark:text-white mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M18 5h-.7c.229-.467.349-.980.351-1.500a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.520.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.900 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z"></path>
-    </svg>
-    <button class="absolute top-2 right-2 w-6 h-6 text-white dark:text-white" aria-label="Close" onclick="hideElement(this.parentElement)">
-      <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-        <path fill-rule="evenodd" d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414L11.414 10l2.293 2.293a1 1 0 11-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10 6.293 7.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-      </svg>
-    </button>
-    <a>
-      <h5 class="mb-2 text-2xl font-semibold tracking-tight text-white dark:text-white">Want to help?</h5>
-    </a>
-    <p class="mb-3 font-normal text-white dark:text-white">Give this project a star. Your support helps it grow and reach new heights. 🚀</p>
-    <a href="https://github.com/qw87rt?tab=repositories" class="inline-flex items-c" style="color: rgb(254, 130, 46);">Github Repo</a>
-  </div>
-
-
-
-
-  <div class="fixed bottom-2 card right-0 max-w-sm p-6 dark:bg-blue-600 border border-blue-200 rounded-lg shadow dark:bg-blue-600 noti2 hidden" style="border: 2px solid rgb(30, 129, 176); margin-right: 20px; margin-bottom: 20px;">
-   
-    <button class="absolute top-2 right-2 w-6 h-6 text-white dark:text-white" aria-label="Close" onclick="hideElement(this.parentElement)">
-      <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-        <path fill-rule="evenodd" d="M6.293 6.293a1 1 0 011.414 0L10 8.586l2.293-2.293a1 1 0 111.414 1.414L11.414 10l2.293 2.293a1 1 0 11-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10 6.293 7.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-      </svg>
-    </button>
-    
-
-    <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="jhun-ray-omiping-75992224b" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://ph.linkedin.com/in/jhun-ray-omiping-75992224b?trk=profile-badge"></a></div>
-              
-  </div>
-
-
-
-<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
-
-<script>
-  window.onload = function() {
-    //setTimeout(showCard, 10000); // 10000 milliseconds = 10 seconds
-   // setTimeout(showCard, 30000); // 10000 milliseconds = 10 seconds
-   // setTimeout(showCard2, 50000); // 10000 milliseconds = 10 seconds
-
-  };
-
-  function showCard() {
-    var card = document.querySelector('.noti');
-    card.classList.remove('hidden'); // Remove the 'hidden' class to show the card
-
-    setTimeout(function() {
-      card.classList.add('hidden'); // Add the 'hidden' class back after 10 seconds
-    }, 10000);
-  }
-
-  function showCard2() {
-    var card = document.querySelector('.noti2');
-    card.classList.remove('hidden'); // Remove the 'hidden' class to show the card
-
-    setTimeout(function() {
-      card.classList.add('hidden'); // Add the 'hidden' class back after 10 seconds
-    }, 10000);
-  }
-</script>
-
-
-  <!-- footer -->
-  <hr style="color: gray;">
-  <footer class="bg-white dark:bg-blue-600">
-    <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-        <div class="md:flex md:justify-between">
-          <div class="mb-6 md:mb-0">
-              <a href="https://github.com/qw87rt" class="flex items-center ">
-                  <img src="./portfolio/img/profile.jpg" class="h-8 w-8 rounded-full mr-3" alt="FlowBite Logo" />
-                  <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white underLineEffect">Jhun Ray Omiping</span>
-              </a>
-          </div>
-
-          <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-              <div>
-                  <h2 class="mb-6 text-sm font-semibold text-orange uppercase dark:text-orange-500">Follow us</h2>
-                  <ul class="text-white dark:text-white font-medium">
-                      <li class="mb-4">
-                          <a href="https://github.com/qw87rt" class="hover:underline ">Github</a>
-                      </li>
-                      <li>
-                          <a href="#" class="hover:underline">Discord</a>
-                      </li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-      <hr class="my-6 border-white sm:mx-auto dark:border-white lg:my-8" />
-      <div class="sm:flex sm:items-center sm:justify-between">
-          <span class="text-sm text-white sm:text-center dark:text-white">© 2024 <a href="https://github.com/qw87rt" class="hover:underline">7hunRay™</a>. All Rights Reserved.
-          </span>
-          <div class="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
-              <a href="#" class="text-orange-500 hover:text-orange-500 dark:hover:text-white">
-                  <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 21 16">
-                        <path d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/>
-                    </svg>
-                  <span class="sr-only">Discord community</span>
-              </a>
-              <a href="https://github.com/qw87rt" class="text-orange-500 hover:text-gray-900 dark:hover:text-white">
-                  <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="sr-only">GitHub account</span>
-              </a>
-          </div>
-      </div>
-    </div>
-  </footer>
-
-  </body>
+        setTimeout(() => addScore(20), 500);
+    </script>
+</body>
 </html>
+```
